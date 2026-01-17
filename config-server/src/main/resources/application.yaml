@@ -1,6 +1,6 @@
 spring:
   application:
-    name: config-server
+    name: marcazia-config-server
   profiles:
     active: native
     cloud:
@@ -10,4 +10,4 @@ spring:
             search-locations: classpath:/configurations
 
 server:
-  port: 8080
+  port: 8888
