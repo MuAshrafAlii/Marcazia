@@ -1,0 +1,12 @@
+server:
+  port: 8090
+
+spring:
+  data:
+    mongodb:
+      username: marcazia_mongo_user
+      password: marcazia_password
+      host: localhost
+      port: 27019
+      database: marcazia_customer
+      authentication-database: admin
