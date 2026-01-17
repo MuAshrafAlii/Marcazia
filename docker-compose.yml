@@ -1,0 +1,75 @@
+services:
+  postgres:
+    container_name: marcazia_postegres
+    image: postgres
+    environment:
+      POSTGRES_USER: marcazia_user
+      POSTGRES_PASSWORD: marcazia_password
+      POSTGRES_DB: marcazia_db
+    volumes:
+      - postgres:/var/lib/postgresql
+    ports:
+      - "5433:5432"
+    networks:
+      - marcazia-network
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: marcazia_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin@marcazia.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-marcazia_pgadmin_password}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5051:80"
+    networks:
+      - marcazia-network
+    restart: unless-stopped
+
+  mongodb:
+    container_name: marcazia_mongo_db
+    image: mongo
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=marcazia_mongo_user
+      - MONGO_INITDB_ROOT_PASSWORD=marcazia_password
+    networks:
+      - marcazia-network
+    restart: unless-stopped
+
+  mongo-express:
+    container_name: marcazia_mongo_express
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: marcazia_mongo_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: marcazia_password
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    networks:
+      - marcazia-network
+
+  maildev:
+    container_name: marcazia_mail_dev
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - marcazia-network
+
+volumes:
+  postgres:
+  pgadmin:
+  mongo:
+
+networks:
+  marcazia-network:
+    driver: bridge
