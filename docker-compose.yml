@@ -53,6 +53,8 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: marcazia_mongo_user
       ME_CONFIG_MONGODB_ADMINPASSWORD: marcazia_password
       ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_URL: mongodb://marcazia_mongo_user:marcazia_password@mongodb:27017/
+      ME_CONFIG_BASICAUTH: "false"
     networks:
       - marcazia-network
 
