@@ -1,17 +1,17 @@
 package com.marcazia.ordeService.order;
 
-import com.marcazia.ordeService.BusinessException;
+import com.marcazia.ordeService.exception.BusinessException;
 import com.marcazia.ordeService.customer.CustomerClient;
+import com.marcazia.ordeService.product.ProductClient;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final CustomerClient customerClient;
+    private final ProductClient productClient;
 
     public Integer createOrder(@Valid OrderRequest request) {
         var customer = customerClient.findCustomerById(request.customerId())
