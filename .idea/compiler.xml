@@ -10,7 +10,7 @@
         <module name="config-server" />
         <module name="discovery" />
       </profile>
-      <profile name="Annotation profile for order-service" enabled="true">
+      <profile name="Annotation profile for marcazia-payment-microservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -19,6 +19,7 @@
         </processorPath>
         <module name="product-service" />
         <module name="order-service" />
+        <module name="payment-microservice" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
@@ -29,6 +30,7 @@
       <module name="customer" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="order-service" options="-parameters" />
+      <module name="payment-microservice" options="-parameters" />
       <module name="product-service" options="-parameters" />
     </option>
   </component>
