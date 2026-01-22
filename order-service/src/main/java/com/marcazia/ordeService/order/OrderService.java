@@ -2,6 +2,8 @@ package com.marcazia.ordeService.order;
 
 import com.marcazia.ordeService.exception.BusinessException;
 import com.marcazia.ordeService.customer.CustomerClient;
+import com.marcazia.ordeService.kafka.OrderConfirmation;
+import com.marcazia.ordeService.kafka.OrderProducer;
 import com.marcazia.ordeService.product.ProductClient;
 import com.marcazia.ordeService.product.PurchaseRequest;
 import jakarta.validation.Valid;
@@ -16,6 +18,8 @@ public class OrderService {
     private final OrderRepository repository;
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
+    private final OrderProducer orderProducer;
+
 
     public Integer createOrder(@Valid OrderRequest request) {
         var customer = customerClient.findCustomerById(request.customerId())
@@ -42,5 +46,17 @@ public class OrderService {
                     )
             );
         }
+
+        orderProducer.sendOrderConfirmation(
+                new OrderConfirmation(
+                        request.reference(),
+                        request.amount(),
+                        request.paymentMethod(),
+                        customer,
+                        purchasedProducts
+                )
+        );
+
+        return order.getId();
     }
 }
