@@ -1,4 +1,4 @@
-package com.marcazia.orderService.order;
+package com.marcazia.orderService.orderLine;
 
 public record OrderLineRequest(
         Integer id,

@@ -1,5 +1,6 @@
-package com.marcazia.orderService.order;
+package com.marcazia.orderService.orderLine;
 
+import com.marcazia.orderService.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 

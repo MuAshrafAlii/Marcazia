@@ -1,5 +1,6 @@
-package com.marcazia.orderService.order;
+package com.marcazia.orderService.orderLine;
 
+import com.marcazia.orderService.order.Order;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,5 +16,12 @@ public class OrderLineMapper {
                 )
                 .productId(request.productId())
                 .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(
+                orderLine.getId(),
+                orderLine.getQuantity()
+        );
     }
 }

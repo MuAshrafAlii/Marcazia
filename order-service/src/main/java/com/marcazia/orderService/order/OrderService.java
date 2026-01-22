@@ -4,11 +4,17 @@ import com.marcazia.orderService.exception.BusinessException;
 import com.marcazia.orderService.customer.CustomerClient;
 import com.marcazia.orderService.kafka.OrderConfirmation;
 import com.marcazia.orderService.kafka.OrderProducer;
+import com.marcazia.orderService.orderLine.OrderLineRequest;
+import com.marcazia.orderService.orderLine.OrderLineService;
 import com.marcazia.orderService.product.ProductClient;
 import com.marcazia.orderService.product.PurchaseRequest;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +64,25 @@ public class OrderService {
         );
 
         return order.getId();
+    }
+
+    public List<OrderResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::fromOrder)
+                .collect(Collectors.toList());
+    }
+
+    public OrderResponse findById(Integer orderId) {
+        return repository.findById(orderId)
+                .map(mapper::fromOrder)
+                .orElseThrow(() ->
+                        new EntityNotFoundException(
+                                String.format(
+                                        "No order found with the provided ID: %d",
+                                        orderId
+                                )
+                        )
+                );
     }
 }

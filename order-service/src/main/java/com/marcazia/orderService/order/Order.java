@@ -1,5 +1,6 @@
 package com.marcazia.orderService.order;
 
+import com.marcazia.orderService.orderLine.OrderLine;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
