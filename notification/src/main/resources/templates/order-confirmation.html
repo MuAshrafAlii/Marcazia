@@ -1,0 +1,21 @@
+<h1>Order Confirmation</h1>
+
+<p>Hello <span th:text="${customerName}"></span></p>
+<p>Order Reference: <span th:text="${orderReference}"></span></p>
+
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.quantity}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+</table>
+
+<p>Total Amount:
+    <strong th:text="${totalAmount}"></strong>
+</p>
