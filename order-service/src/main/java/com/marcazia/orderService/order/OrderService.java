@@ -6,6 +6,8 @@ import com.marcazia.orderService.kafka.OrderConfirmation;
 import com.marcazia.orderService.kafka.OrderProducer;
 import com.marcazia.orderService.orderLine.OrderLineRequest;
 import com.marcazia.orderService.orderLine.OrderLineService;
+import com.marcazia.orderService.payment.PaymentClient;
+import com.marcazia.orderService.payment.PaymentRequest;
 import com.marcazia.orderService.product.ProductClient;
 import com.marcazia.orderService.product.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +27,8 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
+
 
 
     public Integer createOrder(@Valid OrderRequest request) {
@@ -53,6 +57,16 @@ public class OrderService {
             );
         }
 
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+
+        paymentClient.requestOrderPayment(paymentRequest);
+
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
                         request.reference(),
@@ -62,6 +76,7 @@ public class OrderService {
                         purchasedProducts
                 )
         );
+
 
         return order.getId();
     }
