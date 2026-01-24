@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -23,7 +24,9 @@ public class Notification {
 
     private LocalDateTime notificationDate;
 
+    @Transient
     private OrderConfirmation orderConfirmation;
 
+    @Transient
     private PaymentConfirmation paymentConfirmation;
 }
