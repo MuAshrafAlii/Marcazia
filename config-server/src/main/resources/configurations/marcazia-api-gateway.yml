@@ -9,26 +9,26 @@ spring:
           enabled: true
       routes:
         - id: customer-service
-          uri: lb://marcazia-customer-service
+          uri: lb://MARCAZIA-CUSTOMER-SERVICE
           predicates:
             - Path=/api/v1/customers/**
 
         - id: order-service
-          uri: lb://marcazia-order-service
+          uri: lb://MARCAZIA-ORDER-SERVICE
           predicates:
             - Path=/api/v1/orders/**
 
         - id: order-line-service
-          uri: lb://marcazia-order-service
+          uri: lb://MARCAZIA-ORDER-SERVICE
           predicates:
             - Path=/api/v1/order-lines/**
 
         - id: product-service
-          uri: lb://marcazia-product-service
+          uri: lb://MARCAZIA-PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
 
         - id: payment-service
-          uri: lb://marcazia-payment-microservice
+          uri: lb://MARCAZIA-PAYMENT-MICROSERVICE
           predicates:
             - Path=/api/v1/payments/**
