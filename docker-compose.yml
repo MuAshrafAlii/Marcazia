@@ -58,6 +58,13 @@ services:
     networks:
       - marcazia-network
 
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - marcazia-network
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper

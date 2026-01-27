@@ -10,3 +10,8 @@ spring:
     config:
       # Do not override system properties with config server properties
       override-system-properties: false
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
