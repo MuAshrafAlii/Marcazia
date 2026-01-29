@@ -11,7 +11,7 @@
         <module name="config-server" />
         <module name="discovery" />
       </profile>
-      <profile name="Annotation profile for marcazia-notification-service" enabled="true">
+      <profile name="Annotation profile for marcazia-payment-microservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -21,8 +21,8 @@
         <module name="product-service" />
         <module name="notification" />
         <module name="order-service" />
-        <module name="payment-microservice" />
         <module name="customer" />
+        <module name="payment-microservice" />
       </profile>
     </annotationProcessing>
   </component>

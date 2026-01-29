@@ -4,9 +4,5 @@ server:
 spring:
   data:
     mongodb:
-      username: marcazia_mongo_user
-      password: marcazia_password
-      host: localhost
-      port: 27019
-      database: marcazia_customer
-      authentication-database: admin
+      uri: mongodb://marcazia_mongo_user:marcazia_password@${MONGO_HOST:localhost}:${MONGO_PORT:27019}/${MONGO_DB:customerdb}?authSource=admin
+      database: ${MONGO_DB:customerdb}

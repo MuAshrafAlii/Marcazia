@@ -3,6 +3,7 @@ package com.marcazia.customer.customer;
 import com.marcazia.customer.exception.CustomerNotFoundException;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
 public class CustomerService {
     private final CustomerRepository repository;
     private final CustomerMapper mapper;
+
+//    private final MongoTemplate mongoTemplate;
 
     public String createCustomer(CustomerRequest request) {
         Customer customer = repository.save(mapper.toCustomer(request));
